@@ -1,6 +1,7 @@
+import pandas as pd
 import csv
 class DB:
-    global m
+    global m,indx
     m = []
     #m=[]
     def create(self):
@@ -30,44 +31,85 @@ class DB:
         ch = int(input("Enter the choice \n 1. For change name \n2. for change blood group \n3. for change location \n4. change no \nEnter your choice:"))
 
         if ch == 1:
-            name = input("Enter the name:")
-            for i in range(len(m)):
+            file = open('new_file.csv', mode='r')
+            lst = list(csv.reader(file))
+            old = input("Enter the old name:")
 
-                if m[i][0] == name:
-                    x = input("Enter the new name:")
-                    m[i][0] = x
-                    print(m[i])
-                    print("=====Details Updated=====")
+            for i in lst:
+                if i[0] == old:
+
+                    indx = lst.index(i) - 1
+                    print(indx)
+
+
+            new = input("Enter the new name:")
+            df = pd.read_csv("new_file.csv")
+            df.loc[indx, 'Name'] = new
+            df.to_csv("new_file.csv", index=False)
+            log = pd.read_csv("new_file.csv")
+            log.loc[indx, "Name"] = new
+            log.to_csv("new_file.csv", index=False)
 
         if ch == 2:
-            name = input("Enter the name:")
-            for i in range(len(m)):
+            file = open('new_file.csv', mode='r')
+            lst = list(csv.reader(file))
+            old = input("Enter the old name:")
 
-                if m[i][0] == name:
-                    x = input("Enter the new blood group:")
-                    m[i][1] = x
-                    print(m[i])
-                    print("=====Details Updated=====")
+            for i in lst:
+                if i[0] == old:
+
+                    indx = lst.index(i) - 1
+
+            new = input("Enter the new  blood group:")
+            df = pd.read_csv("new_file.csv")
+            df.loc[indx, 'blood_grp'] = new
+            df.to_csv("new_file.csv", index=False)
+            log = pd.read_csv("new_file.csv")
+            log.loc[indx, "blood_grp"] = new
+            log.to_csv("new_file.csv", index=False)
+            print("=====Details Updated=====")
 
         if ch == 3:
-            name = input("Enter the name:")
-            for i in range(len(m)):
+            file = open('new_file.csv', mode='r')
+            lst = list(csv.reader(file))
+            old = input("Enter the old name:")
 
-                if m[i][0] == name:
-                    x = input("Enter the new address:")
-                    m[i][2] = x
-                    print(m[i])
-                    print("=====Details Updated=====")
+            for i in lst:
+                if i[0] == old:
 
-        if ch == 4:
-            name = input("Enter the name:")
-            for i in range(len(m)):
+                    indx = lst.index(i) - 1
 
-                if m[i][0] == name:
-                    x = input("Enter the no:")
-                    m[i][3] = x
-                    print(m[i])
-                    print("=====Details Updated=====")
+
+            new = input("Enter the new location:")
+            df = pd.read_csv("new_file.csv")
+            df.loc[indx, 'location'] = new
+            df.to_csv("new_file.csv", index=False)
+            log = pd.read_csv("new_file.csv")
+            log.loc[indx, "location"] = new
+            log.to_csv("new_file.csv", index=False)
+
+
+        if ch==4:
+            file = open('new_file.csv', mode='r')
+            lst = list(csv.reader(file))
+            old = input("Enter the old name:")
+
+            for i in lst:
+                if i[0] == old:
+
+                    indx = lst.index(i) - 1
+
+
+            new = input("Enter the new no:")
+            df = pd.read_csv("new_file.csv")
+            df.loc[indx, 'no'] = new
+            df.to_csv("new_file.csv", index=False)
+            log = pd.read_csv("new_file.csv")
+            log.loc[indx, "no"] = new
+            log.to_csv("new_file.csv", index=False)
+            print("=====Details Updated=====")
+
+
         else:
             print("Invalid selection")
 
